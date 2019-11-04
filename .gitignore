@@ -1,5 +1,7 @@
 #Common folder for building objects
 build/
+tests/tester
+*.dSYM
 /python/dist/
 /python/*.egg-info
 /python/.eggs
