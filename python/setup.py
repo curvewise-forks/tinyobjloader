@@ -46,7 +46,6 @@ setuptools.setup(
     url="https://github.com/metabolize/tinyobjloader",
     classifiers=["License :: OSI Approved :: MIT License"],
     packages=setuptools.find_packages(),
-    install_requires=["pybind11>=2.3"],
     setup_requires=["pybind11>=2.3"],
     ext_modules=[m],
 )
