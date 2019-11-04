@@ -38,7 +38,7 @@ jobs:
   pool: {vmImage: 'macOS-10.13'}
   variables:
     # Support C++11: https://github.com/joerick/cibuildwheel/pull/156
-    - MACOSX_DEPLOYMENT_TARGET: 10.9
+    MACOSX_DEPLOYMENT_TARGET: 10.9
   steps:
     - task: UsePythonVersion@0
     - bash: |
