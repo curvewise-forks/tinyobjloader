@@ -36,14 +36,14 @@ m = setuptools.Extension(
 
 
 setuptools.setup(
-    name="tinyobjloader",
-    version="0.1",
-    description="Python module for tinyobjloader",
+    name="metabotinyobjloader",
+    version="0.1.0",
+    description="Experimental fork of tinyobjloader Python module",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    author="Syoyo Fujita",
-    author_email="syoyo@lighttransport.com",
-    url="https://github.com/syoyo/tinyobjloader",
+    author="Syoyo Fujita, Paul Melnikow",
+    author_email="syoyo@lighttransport.com, github@paulmelnikow.com",
+    url="https://github.com/metabolize/tinyobjloader",
     classifiers=["License :: OSI Approved :: MIT License"],
     packages=setuptools.find_packages(),
     install_requires=["pybind11>=2.3"],
