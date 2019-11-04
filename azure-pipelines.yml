@@ -3,15 +3,60 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
-trigger:
-- master
+# trigger:
+# - master
 
-pool:
-  vmImage: 'ubuntu-latest'
+# pool:
+#   vmImage: 'ubuntu-latest'
 
-steps:
+# steps:
 
-- script: |
-    cd tests
-    make && ./tester
-  displayName: 'Run unit tests'
+# - script: |
+#     cd tests
+#     make && ./tester
+#   displayName: 'Run unit tests'
+
+
+jobs:
+- job: linux
+  pool: {vmImage: 'Ubuntu-16.04'}
+  steps:
+    - task: UsePythonVersion@0
+    - bash: |
+        python -m pip install --upgrade pip
+        pip install cibuildwheel==0.12.0
+        cd python
+        cibuildwheel --output-dir wheelhouse .
+    - task: PublishBuildArtifacts@1
+      inputs: {pathtoPublish: 'python/wheelhouse'}
+- job: macos
+  pool: {vmImage: 'macOS-10.13'}
+  steps:
+    - task: UsePythonVersion@0
+    - bash: |
+        python -m pip install --upgrade pip
+        pip install cibuildwheel==0.12.0
+        cd python
+        cibuildwheel --output-dir wheelhouse .
+    - task: PublishBuildArtifacts@1
+      inputs: {pathtoPublish: 'python/wheelhouse'}
+- job: windows
+  pool: {vmImage: 'vs2017-win2016'}
+  steps:
+    - {task: UsePythonVersion@0, inputs: {versionSpec: '2.7', architecture: x86}}
+    - {task: UsePythonVersion@0, inputs: {versionSpec: '2.7', architecture: x64}}
+    - {task: UsePythonVersion@0, inputs: {versionSpec: '3.5', architecture: x86}}
+    - {task: UsePythonVersion@0, inputs: {versionSpec: '3.5', architecture: x64}}
+    - {task: UsePythonVersion@0, inputs: {versionSpec: '3.6', architecture: x86}}
+    - {task: UsePythonVersion@0, inputs: {versionSpec: '3.6', architecture: x64}}
+    - {task: UsePythonVersion@0, inputs: {versionSpec: '3.7', architecture: x86}}
+    - {task: UsePythonVersion@0, inputs: {versionSpec: '3.7', architecture: x64}}
+    - script: choco install vcpython27 -f -y
+      displayName: Install Visual C++ for Python 2.7
+    - bash: |
+        python -m pip install --upgrade pip
+        pip install cibuildwheel==0.12.0
+        cd python
+        cibuildwheel --output-dir wheelhouse .
+    - task: PublishBuildArtifacts@1
+      inputs: {pathtoPublish: 'python/wheelhouse'}
