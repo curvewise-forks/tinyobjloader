@@ -18,6 +18,7 @@
 
 variables:
   CIBW_BEFORE_BUILD: pip install pybind11==2.4.3
+  CIBW_SKIP: cp27-win*
 
 jobs:
 - job: linux
@@ -25,6 +26,7 @@ jobs:
   steps:
     - task: UsePythonVersion@0
     - bash: |
+        # Make sure the header files are in the docker image.
         cp *.h python
         python -m pip install --upgrade pip
         pip install cibuildwheel==0.12.0
@@ -36,8 +38,10 @@ jobs:
   pool: {vmImage: 'macOS-10.13'}
   steps:
     - task: UsePythonVersion@0
+    - variables:
+      # Support C++11: https://github.com/joerick/cibuildwheel/pull/156
+      MACOSX_DEPLOYMENT_TARGET: 10.9
     - bash: |
-        cp *.h python
         python -m pip install --upgrade pip
         pip install cibuildwheel==0.12.0
         cd python
