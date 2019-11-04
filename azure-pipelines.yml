@@ -36,11 +36,11 @@ jobs:
       inputs: {pathtoPublish: 'python/wheelhouse'}
 - job: macos
   pool: {vmImage: 'macOS-10.13'}
+  variables:
+    # Support C++11: https://github.com/joerick/cibuildwheel/pull/156
+    - MACOSX_DEPLOYMENT_TARGET: 10.9
   steps:
     - task: UsePythonVersion@0
-    - variables:
-      # Support C++11: https://github.com/joerick/cibuildwheel/pull/156
-        - MACOSX_DEPLOYMENT_TARGET: 10.9
     - bash: |
         python -m pip install --upgrade pip
         pip install cibuildwheel==0.12.0
