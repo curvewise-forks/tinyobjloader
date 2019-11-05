@@ -67,7 +67,7 @@ m = setuptools.Extension(
 
 setuptools.setup(
     name="tinymetabobjloader",
-    version="0.1.0",
+    version="0.1.1",
     description="Experimental fork of tinyobjloader Python module",
     long_description=long_description,
     long_description_content_type="text/markdown",
