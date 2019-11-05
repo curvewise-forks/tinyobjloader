@@ -22,7 +22,7 @@ class get_pybind_include(object):
 
         if self.pep517:
             # When pybind11 is installed permanently in site packages, the headers
-            # will be in the interpreter include path above. pep517 provides an
+            # will be in the interpreter include path above. PEP 517 provides an
             # experimental feature for build system dependencies. When installing
             # a package from a source distribvution, first its build dependencies
             # are installed in a temporary location. pybind11 does not return the
@@ -50,13 +50,15 @@ m = setuptools.Extension(
     extra_compile_args=["-std=c++11"],
     sources=["bindings.cc", "tiny_obj_loader.cc"],
     include_dirs=[
-        # Make `build_ext` work without `sdist`.
+        # Support `build_ext` finding tinyobjloader (without first running
+        # `sdist`).
         "..",
-        # Support `build_ext` (provided pybind11 is installed).
+        # Support `build_ext` finding pybind 11 (provided it's permanently
+        # installed).
         get_pybind_include(),
         get_pybind_include(user=True),
-        # Support building from a source distribution (pybind11 from
-        # a pep517 temporary install).
+        # Support building from a source distribution finding pybind11 from
+        # a PEP 517 temporary install.
         get_pybind_include(pep517=True),
     ],
     language="c++",
@@ -74,6 +76,5 @@ setuptools.setup(
     url="https://github.com/metabolize/tinyobjloader",
     classifiers=["License :: OSI Approved :: MIT License"],
     packages=setuptools.find_packages(),
-    setup_requires=["pybind11>=2.3"],
     ext_modules=[m],
 )
