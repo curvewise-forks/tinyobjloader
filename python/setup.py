@@ -81,16 +81,16 @@ m = setuptools.Extension(
 
 
 setuptools.setup(
-    name="tinyobjloader",
-    version="2.0.0rc8",
-    description="Tiny but powerful Wavefront OBJ loader",
+    name="tinymetabobjloader",
+    version="2.0.0rc9.dev0",
+    description="Occasional fork of tinyobjloader",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    author="Syoyo Fujita",
-    author_email="syoyo@lighttransport.com",
-    url="https://github.com/tinyobjloader/tinyobjloader",
+    author="Syoyo Fujita, Paul Melnikow",
+    author_email="syoyo@lighttransport.com, github@paulmelnikow.com",
+    url="https://github.com/curvewise-forks/tinyobjloader",
     project_urls={
-        "Issue Tracker": "https://github.com/tinyobjloader/tinyobjloader/issues",
+        "Issue Tracker": "https://github.com/curvewise-forks/tinyobjloader/issues",
     },
     classifiers=[
         "Development Status :: 5 - Production/Stable",
