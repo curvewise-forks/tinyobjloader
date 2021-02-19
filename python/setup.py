@@ -81,7 +81,7 @@ m = setuptools.Extension(
 
 
 setuptools.setup(
-    name="metabotinyobjloader",
+    name="tinymetabobjloader",
     version="2.0.0rc9.dev0",
     description="Occasional fork of tinyobjloader",
     long_description=long_description,
