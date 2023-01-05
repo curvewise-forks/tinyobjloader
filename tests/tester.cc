@@ -1332,6 +1332,10 @@ void test_mtl_filename_with_whitespace_issue46() {
   TEST_CHECK("green" == materials[0].name);
 }
 
+void test_loading_obj_with_invalid_index() {
+  TEST_EXCEPTION(TestLoadObj("../models/invalid-index.obj"), tinyobj::InvalidIndexException);
+}
+
 // Fuzzer test.
 // Just check if it does not crash.
 // Disable by default since Windows filesystem can't create filename of afl
@@ -1433,4 +1437,5 @@ TEST_LIST = {
      test_texres_texopt_issue248},
     {"test_mtl_filename_with_whitespace_issue46",
      test_mtl_filename_with_whitespace_issue46},
+    {"test_loading_obj_with_invalid_index", test_loading_obj_with_invalid_index},
     {NULL, NULL}};

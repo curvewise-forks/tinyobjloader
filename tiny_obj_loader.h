@@ -460,10 +460,6 @@ class InvalidIndexException : public std::exception
     InvalidIndexException(int invalidIndex){
       this->invalidIndex = invalidIndex;
     }
-
-    char* what () {
-        return "Found invalid index";
-    }
 };
 
 
@@ -2468,14 +2464,8 @@ bool LoadObj(attrib_t *attrib, std::vector<shape_t> *shapes,
         greatest_vt_idx =
             greatest_vt_idx > vi.vt_idx ? greatest_vt_idx : vi.vt_idx;
 
-        if(vi.v_idx < 1){
+        if(vi.v_idx < 0){
           throw InvalidIndexException(vi.v_idx);
-        }
-        if(vi.vt_idx < 1){
-          throw InvalidIndexException(vi.vt_idx);
-        }
-        if(vi.vn_idx < 1){
-          throw InvalidIndexException(vi.vn_idx);
         }
 
         face.vertex_indices.push_back(vi);
